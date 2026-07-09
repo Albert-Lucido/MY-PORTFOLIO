@@ -79,7 +79,7 @@ export const skillGroups: SkillGroup[] = [
 
 export const timeline: TimelineEntry[] = [
   {
-    title: "Full-Stack Developer Intern",
+    title: "IT Intern (Full-Stack Developer)",
     organization: "Knowles Training Institute",
     period: "Feb 2026 – Apr 2026",
     description:
