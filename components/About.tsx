@@ -1,40 +1,35 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
+import SectionHeading from "@/components/SectionHeading";
+import { profile } from "@/data/site";
 
 export default function About() {
   return (
-    <section id="about" className="mx-auto w-full max-w-6xl px-6 py-20">
+    <section id="about" className="mx-auto w-full max-w-6xl px-6 py-20 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: "-10%" }}
         transition={{ duration: 0.6 }}
-        className="grid gap-10 md:grid-cols-[280px_1fr]"
+        className="grid gap-10 lg:grid-cols-[320px_1fr]"
       >
-        <div className="aspect-square rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827] to-[#0f172a] p-4">
-          <div className="flex h-full items-center justify-center rounded-2xl border border-dashed border-white/20 text-center text-sm text-[#94A3B8]">
-            Profile Image
+        <div className="rounded-[2rem] border border-white/10 bg-white/5 p-5 backdrop-blur-md">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/60 shadow-[0_24px_60px_rgba(2,6,23,0.35)]">
+            <Image src={profile.image} alt={`${profile.name} portrait`} fill sizes="(max-width: 1024px) 100vw, 320px" className="object-cover" />
           </div>
         </div>
 
         <div>
-          <h2 className="text-3xl font-bold">About</h2>
-          <div className="mt-6 space-y-4 text-[#94A3B8]">
-            <p>
-              I&apos;m a software developer who enjoys turning ideas into polished, user-focused experiences across web and mobile platforms.
-            </p>
-            <p>
-              My work blends modern frontend tooling with practical engineering decisions to deliver products that are reliable, maintainable, and impactful.
-            </p>
-            <p>
-              I&apos;m currently focused on building projects that combine AI, data, and intuitive interfaces to solve real-world problems.
-            </p>
-          </div>
+          <SectionHeading eyebrow="About" title="Professional, practical, and focused on building real systems" description={profile.about} />
 
-          <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-5">
-            <h3 className="text-lg font-semibold">Education / Timeline</h3>
-            <p className="mt-2 text-sm text-[#94A3B8]">Timeline placeholder — add your education milestones and key experiences here.</p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {profile.highlights.slice(0, 4).map((item) => (
+              <div key={item} className="rounded-3xl border border-white/10 bg-white/5 p-5 text-sm leading-7 text-slate-300">
+                {item}
+              </div>
+            ))}
           </div>
         </div>
       </motion.div>

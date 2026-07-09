@@ -1,21 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
+import SectionHeading from "@/components/SectionHeading";
 import ProjectCard from "@/components/ProjectCard";
-import { projects } from "@/data/projects";
+import { projects } from "@/data/site";
 
 export default function Projects() {
   return (
-    <section id="projects" className="mx-auto w-full max-w-6xl px-6 py-20">
+    <section id="projects" className="mx-auto w-full max-w-6xl px-6 py-20 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: "-10%" }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-3xl font-bold">Projects</h2>
-        <p className="mt-3 max-w-2xl text-[#94A3B8]">Featured work spanning AI, web, and mobile development.</p>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+        <SectionHeading
+          eyebrow="Projects"
+          title="Four featured systems, each supported by screenshots and a dedicated detail page"
+          description="The cards are intentionally concise. The detail pages carry the full project narrative, gallery, and technical breakdown."
+        />
+
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
           {projects.map((project) => (
             <ProjectCard key={project.title} project={project} />
           ))}

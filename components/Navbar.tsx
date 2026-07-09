@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { profile } from "@/data/site";
 
-const navItems = ["home", "about", "projects", "skills", "contact"];
+const navItems = ["home", "about", "experience", "projects", "skills", "contact"];
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
@@ -32,14 +34,17 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0B1120]/80 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/75 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#home" className="text-sm font-semibold tracking-[0.2em] text-[#38BDF8]">
-          AL
+        <a href="#home" className="flex items-center gap-3 text-sm font-semibold tracking-[0.32em] text-cyan-300">
+          <span className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-[0_0_0_1px_rgba(34,211,238,0.18)]">
+            <Image src={profile.image} alt={`${profile.name} avatar`} fill sizes="36px" className="object-cover" />
+          </span>
+          <span className="hidden sm:inline">ALBERT</span>
         </a>
 
         <button
-          className="rounded-md p-2 text-[#F8FAFC] md:hidden"
+          className="rounded-md p-2 text-white md:hidden"
           onClick={() => setIsOpen((prev) => !prev)}
           aria-label="Toggle menu"
         >
@@ -51,8 +56,8 @@ export default function Navbar() {
             <li key={item}>
               <a
                 href={`#${item}`}
-                className={`text-sm capitalize transition-colors hover:text-[#38BDF8] ${
-                  activeSection === item ? "text-[#38BDF8]" : "text-[#94A3B8]"
+                className={`text-sm capitalize transition-colors hover:text-cyan-300 ${
+                  activeSection === item ? "text-cyan-300" : "text-slate-300"
                 }`}
               >
                 {item}
@@ -68,8 +73,8 @@ export default function Navbar() {
             <li key={item}>
               <a
                 href={`#${item}`}
-                className={`block rounded-md px-2 py-2 text-sm capitalize transition-colors hover:text-[#38BDF8] ${
-                  activeSection === item ? "text-[#38BDF8]" : "text-[#94A3B8]"
+                className={`block rounded-md px-2 py-2 text-sm capitalize transition-colors hover:text-cyan-300 ${
+                  activeSection === item ? "text-cyan-300" : "text-slate-300"
                 }`}
                 onClick={() => setIsOpen(false)}
               >

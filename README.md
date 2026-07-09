@@ -7,16 +7,18 @@ Modern, responsive personal portfolio built with **Next.js App Router**, **React
 - Dark, recruiter-friendly UI with modern spacing and typography
 - Sticky navbar with active section highlighting
 - Smooth scrolling and subtle section fade-in animations
-- Reusable section components and centralized project data
+- Dynamic project detail pages at `/projects/[slug]`
+- Screenshot gallery with click-to-enlarge lightbox for each project
 - Fully responsive layout for mobile, tablet, and desktop
-- SEO-ready metadata and Vercel-friendly setup
+- SEO-ready metadata, `robots.txt`, and `sitemap.xml`
+- Vercel-ready — no environment variables required
 
 ## Tech Stack
 
-- Next.js (App Router)
-- React
+- Next.js 15 (App Router)
+- React 19
 - TypeScript
-- Tailwind CSS
+- Tailwind CSS v4
 - Framer Motion
 - Lucide React
 
@@ -24,23 +26,38 @@ Modern, responsive personal portfolio built with **Next.js App Router**, **React
 
 ```text
 app/
-  layout.tsx
-  page.tsx
-components/
-  Navbar.tsx
-  Hero.tsx
-  About.tsx
-  Projects.tsx
-  ProjectCard.tsx
-  Skills.tsx
-  Contact.tsx
-  Footer.tsx
+  layout.tsx            # Root layout with metadata and fonts
+  page.tsx              # Home page
+  projects/
+    [slug]/
+      page.tsx          # Dynamic project detail page
+components/             # All UI components
 data/
-  projects.ts
+  site.ts               # All content: profile, skills, timeline, projects
+  projects.ts           # Re-export of project types and helpers
 public/
+  projects/
+    thesis/             # Thesis project screenshots
+    payroll/            # Payroll project screenshots
+    intern/             # Intern project screenshots
+    signalph/           # SignalPH project screenshots
+  images/
+    profile/            # Profile photo
+  robots.txt
+  sitemap.xml
 styles/
   globals.css
 ```
+
+## Project Routes
+
+| Route | Description |
+|---|---|
+| `/` | Home — Hero, About, Experience, Projects, Skills, Contact |
+| `/projects/thesis` | AI-Driven UAV Rice Weed Detection System |
+| `/projects/payroll` | Payroll Management System |
+| `/projects/intern` | Knowles Training Institute System |
+| `/projects/signalph` | SignalPH — Signal Intelligence Platform |
 
 ## Getting Started
 
@@ -60,4 +77,6 @@ npm run build
 
 ## Deployment
 
-Deploy directly to **Vercel** as a frontend-only Next.js project.
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for full step-by-step Vercel deployment instructions.
+
+No environment variables are required for this project.

@@ -1,5 +1,7 @@
-import { ExternalLink, Github } from "lucide-react";
-import type { Project } from "@/data/projects";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import type { ProjectDetail as Project } from "@/data/site";
 
 type ProjectCardProps = {
   project: Project;
@@ -7,26 +9,31 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="rounded-2xl border border-white/10 bg-[#111827]/90 p-5 transition hover:-translate-y-1 hover:border-[#38BDF8]/40">
-      <div className="mb-4 h-40 rounded-xl border border-dashed border-white/20 bg-gradient-to-br from-[#0f172a] to-[#1e293b]" />
-      <h3 className="text-xl font-semibold">{project.title}</h3>
-      <p className="mt-3 text-sm leading-6 text-[#94A3B8]">{project.description}</p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {project.technologies.map((tech) => (
-          <span key={tech} className="rounded-full border border-[#2563EB]/40 bg-[#2563EB]/10 px-3 py-1 text-xs text-[#BFDBFE]">
-            {tech}
-          </span>
-        ))}
+    <article className="group overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/30 hover:bg-white/[0.07]">
+      <div className="relative aspect-[16/10] overflow-hidden">
+        <Image
+          src={project.thumbnail.src}
+          alt={project.thumbnail.alt}
+          fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover transition duration-500 group-hover:scale-105"
+        />
       </div>
-      <div className="mt-6 flex gap-3">
-        <a href={project.liveUrl} className="inline-flex items-center gap-2 rounded-full bg-[#2563EB] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#1D4ED8]">
-          <ExternalLink size={16} />
-          Live Demo
-        </a>
-        <a href={project.githubUrl} className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm font-medium text-[#F8FAFC] transition hover:border-[#38BDF8] hover:text-[#38BDF8]">
-          <Github size={16} />
-          GitHub
-        </a>
+      <div className="p-6">
+        <p className="text-xs uppercase tracking-[0.25em] text-cyan-300/80">{project.subtitle}</p>
+        <h3 className="mt-3 text-2xl font-semibold text-white">{project.title}</h3>
+        <p className="mt-4 text-sm leading-7 text-slate-300">{project.summary}</p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {project.technologies.slice(0, 4).map((tech) => (
+            <span key={tech} className="rounded-full border border-white/10 bg-slate-950/60 px-3 py-1 text-xs text-slate-300">
+              {tech}
+            </span>
+          ))}
+        </div>
+        <Link href={`/projects/${project.slug}`} className="mt-6 inline-flex items-center gap-2 rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition duration-300 hover:bg-cyan-300">
+          View Project
+          <ArrowRight size={16} />
+        </Link>
       </div>
     </article>
   );

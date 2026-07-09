@@ -1,26 +1,47 @@
 import type { Metadata } from "next";
+import { Manrope, Space_Grotesk } from "next/font/google";
+import { profile, siteMetadata } from "@/data/site";
 import "../styles/globals.css";
 
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+});
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteMetadata.baseUrl),
   title: {
-    default: "Albert Lucido | Software Developer",
-    template: "%s | Albert Lucido",
+    default: `${profile.name} | ${profile.title}`,
+    template: `%s | ${profile.name}`,
   },
-  description:
-    "Personal portfolio of Albert Lucido, a software developer focused on modern web, mobile, and AI-powered applications.",
-  keywords: [
-    "Albert Lucido",
-    "Software Developer",
-    "Portfolio",
-    "Next.js",
-    "TypeScript",
-    "React",
-  ],
+  description: profile.summary,
+  alternates: {
+    canonical: siteMetadata.canonicalPath,
+  },
+  keywords: [profile.name, profile.title, "Portfolio", "Next.js", "TypeScript", "React", "React Native", "Node.js", "FastAPI", "PostgreSQL"],
   openGraph: {
-    title: "Albert Lucido | Software Developer",
-    description:
-      "Explore projects, skills, and contact details for Albert Lucido.",
+    title: `${profile.name} | ${profile.title}`,
+    description: profile.summary,
     type: "website",
+    images: [
+      {
+        url: profile.image,
+        width: 1200,
+        height: 1200,
+        alt: `${profile.name} profile picture`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${profile.name} | ${profile.title}`,
+    description: profile.summary,
+    images: [profile.image],
   },
 };
 
@@ -30,8 +51,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className="min-h-full bg-[#0B1120] text-[#F8FAFC] antialiased">
+    <html lang="en" className={`${manrope.variable} ${spaceGrotesk.variable} h-full scroll-smooth`}>
+      <body className="min-h-full antialiased">
         {children}
       </body>
     </html>
